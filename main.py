@@ -27,15 +27,25 @@ async def buy_product(product_name: str, buy_count: int):
         temp = json.load(f)
         f.close()
         index = 0
+        flag = True
         while index < len(temp):
             for key, val in temp[index].items():
                 if key == product_name:
                     if val >= buy_count:
                         val = val - buy_count
                         temp[index] = {key: val}
+                        flag = False
+                        break
                     else:
-                        return {"Not enough items in warehouse! ": key + "in stock: " + str(val)}
+                        return {"Not enough items in warehouse! ": key 
+                            + "in stock: " 
+                            + str(val)}
+                else:
+                    return {"There's no item like that in warehouse! "}
+            if not flag:
+                break 
             index += 1
+
     with open(filename, "w") as f:
         json.dump(temp, f, indent = 1)
     with open(filename, "r") as f:

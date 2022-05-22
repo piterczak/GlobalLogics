@@ -1,27 +1,32 @@
-#A python application with mix of FastAPI 
-#that works as a shop on a Uvicorn werb server and JSON file.
+# A python application with mix of FastAPI
+# that works as a shop on a Uvicorn werb server and JSON file.
 
 from fastapi import FastAPI
 import json
 
-#Application named Shop created with FastAPI
-shop = FastAPI()
+shop = FastAPI()  # Application named Shop created with FastAPI
 
-#DataBase with list of products that will be in store in JSON file.
+# DataBase with list of products that will be in store in JSON file.
 filename = "./data/warehouse.json"
 database = filename
 
-@shop.get("/")  #to main page
+
+# Main page of the web server
+@shop.get("/")
 async def root():
     return{"Welcome to the shop": "!"}
 
-@shop.get("/products_list")  #page that returns items from database as JSON
-async def product_list():
-    with open (filename, "r") as f:
-        temp = json.load(f)
-    return {"List of products ":temp}
 
-@shop.get("/products_list/{product_name}/buy_count/{buy_count}") #page that allows user to buy item, substracting value from JSON database
+# Page that returns items from database as JSON
+@shop.get("/products_list")
+async def product_list():
+    with open(filename, "r") as f:
+        temp = json.load(f)
+    return {"List of products ": temp}
+
+
+# Page that allows user to buy item, substracting value from JSON database
+@shop.get("/products_list/{product_name}/buy_count/{buy_count}")
 async def buy_product(product_name: str, buy_count: int):
     with open(filename, "r") as f:
         temp = json.load(f)
@@ -37,19 +42,17 @@ async def buy_product(product_name: str, buy_count: int):
                         flag = False
                         break
                     else:
-                        return {"Not enough items in warehouse! ": key 
-                            + "in stock: " 
-                            + str(val)}
+                        return {"Not enough items in warehouse! ": key +
+                                "in stock: " +
+                                str(val)}
                 else:
                     return {"There's no item like that in warehouse! "}
             if not flag:
-                break 
+                break
             index += 1
 
     with open(filename, "w") as f:
-        json.dump(temp, f, indent = 1)
+        json.dump(temp, f, indent=1)
     with open(filename, "r") as f:
         temp = json.load(f)
     return {"List of products ": temp}
-
-

@@ -1,13 +1,14 @@
-import unittest
+from fastapi.testclient import TestClient
+from main import shop
 import interface
 
+client = TestClient(shop)
 
+def test_view_shop():
+    response = client.get("/products_list")
+    assert response.status_code == 200
+    assert type(response.json()['List of products ']) == list
 
-class TestInterface(unittest.TestCase):
-
-    def test_url_parse(self):
-        result = interface.view_shop("http://127.0.0.1:8000/products_list")
-        self.assertIs(result, "http://127.0.0.1:8000/products_list")
-
-if __name__ == '__main__':
-    unittest.main()
+def test_buy_item_pass():
+    response = interface.buy_item("Apples", 5)
+    assert response 

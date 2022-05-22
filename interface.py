@@ -29,6 +29,7 @@ def buy_item(product_name, buy_count):
               product_name)
     print(pretty_json_response)
     print("")
+    return 
 
 
 def buying_product():

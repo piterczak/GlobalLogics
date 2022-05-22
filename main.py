@@ -1,6 +1,5 @@
 # A python application with mix of FastAPI
 # that works as a shop on a Uvicorn werb server and JSON file.
-
 from fastapi import FastAPI
 import json
 
@@ -36,17 +35,19 @@ async def buy_product(product_name: str, buy_count: int):
         while index < len(temp):
             for key, val in temp[index].items():
                 if key == product_name:
-                    if val >= buy_count:
+                    if buy_count == 0:
+                        return {"Can't buy 0 items!"}
+                    elif val >= buy_count:
                         val = val - buy_count
                         temp[index] = {key: val}
                         flag = False
                         break
-                    else:
+                    elif val < buy_count:
                         return {"Not enough items in warehouse! ": key +
                                 "in stock: " +
                                 str(val)}
                 else:
-                    return {"There's no item like that in warehouse! "}
+                    return {"There's no item like that in warehouse!"}
             if not flag:
                 break
             index += 1
@@ -56,3 +57,5 @@ async def buy_product(product_name: str, buy_count: int):
     with open(filename, "r") as f:
         temp = json.load(f)
     return {"List of products ": temp}
+
+

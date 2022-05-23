@@ -1,3 +1,7 @@
+1. Make sure to install python 3.9.4 version
+2. Download repository from GIT
+3. Create virtual enviroment in directory with repository (DELETE DOWNLOADED VENV DIRECTORY AND CREATE NEW ONE IN IT'S PLACE)
+
 To run the project download GIT Repository to your local machine
 1. Navigate to the directory with downloaded repository
 2. Go to GlobalLogics directory

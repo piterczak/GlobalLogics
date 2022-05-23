@@ -1,6 +1,12 @@
 1. Make sure to install python 3.9.4 version
 2. Download repository from GIT
-3. Create virtual enviroment in directory with repository (DELETE DOWNLOADED VENV DIRECTORY AND CREATE NEW ONE IN IT'S PLACE)
+3. Create virtual enviroment in directory with repository:
+    open CMD, navigate to directory with downloaded repository
+    type in: python -m c:\...\GlobalLogics\venv     where "..." is the path to downloaded repository
+    after few seconds, virtual environment shall be created
+    run it by navigating in cmd to venv/scripts
+    and by typing "activate".
+4. When venv is up and running, go back to GlobalLogics directory in cmd, type in "pip install -r requirements.txt"
 
 To run the project download GIT Repository to your local machine
 1. Navigate to the directory with downloaded repository

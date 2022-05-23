@@ -1,2 +1,5 @@
 backup_ver1
 models.py
+
+#Environments
+venv/

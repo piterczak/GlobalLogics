@@ -46,11 +46,11 @@ async def buy_product(product_name: str, buy_count: int):
                         return {"Not enough items in warehouse! ": key +
                                 "in stock: " +
                                 str(val)}
-                else:
-                    return {"There's no item like that in warehouse!"}
             if not flag:
                 break
             index += 1
+        if flag:
+            return {"There's no item like that in warehouse!"}
 
     with open(filename, "w") as f:
         json.dump(temp, f, indent=1)
